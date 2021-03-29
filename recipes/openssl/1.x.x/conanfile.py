@@ -1,8 +1,7 @@
 import os
 import fnmatch
-import platform
 from functools import total_ordering
-from conans.errors import ConanInvalidConfiguration, ConanException
+from conans.errors import ConanInvalidConfiguration
 from conans import ConanFile, AutoToolsBuildEnvironment, tools
 
 
@@ -74,7 +73,6 @@ class OpenSSLConan(ConanFile):
                "386": [True, False],
                "no_sse2": [True, False],
                "no_bf": [True, False],
-               "no_cast": [True, False],
                "no_des": [True, False],
                "no_dh": [True, False],
                "no_dsa": [True, False],
@@ -104,7 +102,7 @@ class OpenSSLConan(ConanFile):
             if not self._win_bash:
                 self.build_requires("strawberryperl/5.30.0.1")
             if not self.options.no_asm and not tools.which("nasm"):
-                self.build_requires("nasm/2.14")
+                self.build_requires("nasm/2.15.05")
         if self._win_bash:
             if "CONAN_BASH_PATH" not in os.environ and tools.os_info.detect_windows_subsystem() != 'msys2':
                 self.build_requires("msys2/20190524")
