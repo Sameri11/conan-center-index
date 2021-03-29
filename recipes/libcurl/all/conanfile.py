@@ -441,7 +441,7 @@ class LibcurlConan(ConanFile):
 
         # Secure Transport uses Keychain for certificate discovery. Every other engine,
         # if included, should provide a certificate during run time.
-        if self.options.darwin_ssl:
+        if "darwin_ssl" in self.options and self.options.darwin_ssl:
             self._cmake.definitions["CURL_CA_PATH"] = "none"
             self._cmake.definitions["CURL_CA_BUNDLE"] = "none"
 
@@ -450,7 +450,8 @@ class LibcurlConan(ConanFile):
         self._cmake.definitions["CMAKE_USE_WINSSL"] = self.options.get_safe("with_winssl", False)
         self._cmake.definitions["CMAKE_USE_OPENSSL"] = self.options.with_openssl
         self._cmake.definitions["CMAKE_USE_WOLFSSL"] = self.options.with_wolfssl
-        self._cmake.definitions["CMAKE_USE_SECTRANSP"] = self.options.darwin_ssl
+        if "darwin_ssl" in self.options:
++            self._cmake.definitions["CMAKE_USE_SECTRANSP"] = self.options.darwin_ssl
         self._cmake.configure(build_folder=self._build_subfolder)
         return self._cmake
 
