@@ -14,6 +14,7 @@ class LibcurlConan(ConanFile):
     license = "MIT"
     exports_sources = ["lib_Makefile_add.am", "CMakeLists.txt"]
     generators = "cmake", "pkg_config"
+    revision_mode = "scm"
 
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False],
