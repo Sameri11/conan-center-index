@@ -451,7 +451,7 @@ class LibcurlConan(ConanFile):
         self._cmake.definitions["CMAKE_USE_OPENSSL"] = self.options.with_openssl
         self._cmake.definitions["CMAKE_USE_WOLFSSL"] = self.options.with_wolfssl
         if "darwin_ssl" in self.options:
-+            self._cmake.definitions["CMAKE_USE_SECTRANSP"] = self.options.darwin_ssl
+            self._cmake.definitions["CMAKE_USE_SECTRANSP"] = self.options.darwin_ssl
         self._cmake.configure(build_folder=self._build_subfolder)
         return self._cmake
 
